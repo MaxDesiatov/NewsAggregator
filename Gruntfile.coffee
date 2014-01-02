@@ -44,7 +44,7 @@ module.exports = (grunt) ->
     dest: 'public/'
 
   jadeConfig = {}
-  for view in []
+  for view in ['header', 'news']
     jadeConfig[view] =
       options:
         client: true
@@ -53,16 +53,19 @@ module.exports = (grunt) ->
         processName: (name) ->
           name.replace /.*\/([A-Za-z]+)\.jade/, '$1'
       files: {}
-    jadeConfig[view].files['dist/public/views/' + view + '.js'] =
-      'public/views/' + view + '/*.jade'
+    jadeConfig[view].files['public/views/' + view + '.js'] =
+      'private/views/' + view + '/*.jade'
 
   grunt.initConfig
     watch:
+      js:
+        files: ['private/**/*.js']
+        tasks: ['copy:js']
       stylus:
         files: ['private/**/*.styl']
         tasks: ['stylus']
       clientJade:
-        files: ['public/**/*.jade']
+        files: ['private/**/*.jade']
         tasks: ['jade']
 
     clean:
@@ -80,7 +83,13 @@ module.exports = (grunt) ->
           'public/stylesheets/style.css': 'private/stylesheets/style.styl'
 
     copy:
-      debug:
+      js:
+        expand: true
+        cwd: 'private'
+        src: 'scripts/*'
+        dest: 'public'
+
+      components:
         files: debugFiles
 
     rename:
@@ -109,8 +118,9 @@ module.exports = (grunt) ->
   grunt.registerTask 'dist', [
     'clean:dist',
     'stylus',
-    # 'jade',
-    'copy'
+    'jade',
+    'copy',
+    'rename'
   ]
 
   grunt.registerTask 'default', [

@@ -1,0 +1,12 @@
+a.navbar-brand News Aggregator
+
+ul.nav.navbar-nav#header-navigation
+  - var newsClass = active === 'news' ? 'active' : ''
+  - var bbcClass = active === 'bbc' ? 'active' : ''
+  - var skyClass = active == 'sky' ? 'active' : ''
+  li.all(class=newsClass)
+    a(href='#news') All News
+  li.bbc(class=bbcClass)
+    a(href='#bbc') BBC News
+  li.bbc(class=skyClass)
+    a(href='#sky') SKY News

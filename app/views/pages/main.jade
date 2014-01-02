@@ -1,8 +1,11 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href="/stylesheets/screen.css")
+    title News Aggregator
+    link(rel="stylesheet", href="/stylesheets/bootstrap.css")
+    link(rel="stylesheet", href="/stylesheets/font-awesome.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    script(data-main="scripts/main", src="scripts/require.js")
   body
-    h1= title
-    p Welcome aboard!
+    .navbar.navbar-fixed-top.navbar-inverse#header
+    .container#content

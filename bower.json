@@ -10,6 +10,8 @@
     "requirejs": "~2.1.8",
     "jade": "~1.0.2",
     "bootstrap": "~3.0.3",
-    "momentjs": "~2.5.0"
+    "momentjs": "~2.5.0",
+    "backbone.wreqr": "~0.2.0",
+    "backbone.babysitter": "~0.0.6"
   }
 }

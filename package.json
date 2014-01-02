@@ -10,7 +10,10 @@
     "connect-powered-by": "0.1.x",
     "grunt": "~0.4.2",
     "matchdep": "~0.3.0",
-    "jade": "~1.0.2"
+    "jade": "~1.0.2",
+    "htmlparser": "~1.7.7",
+    "underscore": "~1.5.2",
+    "request": "~2.30.0"
   },
   "devDependencies": {
     "grunt-concurrent": "~0.4.2",
@@ -20,7 +23,9 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-bower-postinst": "~0.2.1",
     "grunt-bower-task": "~0.3.4",
-    "grunt-contrib-copy": "~0.5.0"
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jade": "~0.9.0",
+    "grunt-contrib-rename": "0.0.3"
   },
   "scripts": {
     "start": "node server.js"
