@@ -2,6 +2,7 @@ var locomotive = require('locomotive'),
     _          = require('underscore'),
     FeedParser = require('feedparser'),
     request    = require('request'),
+    moment     = require('moment'),
 NewsController = new locomotive.Controller();
 
 _(NewsController).extend({
@@ -16,7 +17,10 @@ _(NewsController).extend({
       }
     })
     .on('end', function () {
-          that.res.send(items);
+      var res = _(items).chain()
+        .sortBy(function (item) { return -moment(item.date).valueOf() })
+        .first(10).value();
+      that.res.send(res);
     });
   },
 

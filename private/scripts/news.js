@@ -10,28 +10,25 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
   });
 
   var NewsItemView = Marionette.ItemView.extend({
-    tagName: 'div',
-    className: 'cold-md-12',
+    className: 'row',
     modelEvents: {
       'change': 'render'
     },
 
     template: function (data) {
-      return templates.item(data);
+      var res = _(data).extend({ formattedDate: data['rss:pubdate']['#'] });
+      return templates.item(res);
     }
   });
 
-  var news = new NewsCollection();
+  window.news = new NewsCollection();
 
   var Empty = Marionette.ItemView.extend({
-    tagName: 'div',
-    className: 'cold-md-12',
+    className: 'row',
     template: function () { return 'No news have been loaded.'; }
   });
 
   var NewsTable = Marionette.CollectionView.extend({
-    tagName: 'ul',
-    className: 'jobs',
     itemView: NewsItemView,
     emptyView: Empty,
     collection: news,
