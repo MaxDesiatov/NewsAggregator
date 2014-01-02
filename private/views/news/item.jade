@@ -1,7 +1,6 @@
 .col-md-12
-  a(href=link)
-    h4= title
-    img.item-thumbnail(src=image.url, align='left')
+  h4: a(href=link)= title
+  a(href=link): img.item-thumbnail(src=image.url, align='left')
   span.item-summary= summary
 .col-md-12
   .item-published.pull-right

@@ -1,5 +1,5 @@
-  define(['backbone', 'backbone.marionette', 'news', 'header'],
-    function (Backbone, Marionette, newsController, headerLayout) {
+  define(['backbone', 'backbone.marionette', 'underscore', 'news', 'header'],
+    function (Backbone, Marionette, _, newsController, headerLayout) {
       var app = new Marionette.Application();
 
       app.addRegions({
@@ -10,7 +10,8 @@
       app.on("initialize:after", function () {
         if (!Backbone.history.started)
           Backbone.history.start();
-        Backbone.history.navigate('news', { trigger: true });
+        if (!_.contains(['news', 'sky', 'bbc'], Backbone.history.fragment))
+          Backbone.history.navigate('news', { trigger: true });
         app.header.show(headerLayout);
       });
 

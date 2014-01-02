@@ -15,12 +15,13 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
     },
 
     template: function (data) {
-      var res = _(data).extend({ formattedDate: data['rss:pubdate']['#'] });
+      var date = moment(data['rss:pubdate']['#']).format("ddd, DD MMM YYYY, hh:mm:ss")
+      var res = _(data).extend({ formattedDate: date });
       return templates.item(res);
     }
   });
 
-  window.news = new NewsCollection();
+  var news = new NewsCollection();
 
   var Empty = Marionette.ItemView.extend({
     className: 'row',
