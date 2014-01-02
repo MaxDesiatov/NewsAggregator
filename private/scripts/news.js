@@ -15,7 +15,7 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
     },
 
     template: function (data) {
-      var date = moment(data['rss:pubdate']['#']).format("ddd, DD MMM YYYY, hh:mm:ss")
+      var date = moment(data['rss:pubdate']['#']).format("ddd, DD MMM YYYY, H:mm:ss")
       var res = _(data).extend({ formattedDate: date });
       return templates.item(res);
     }
