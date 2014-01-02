@@ -1,4 +1,4 @@
-NewsAgggregator
+NewsAggregator
 ===========================
 
 Demo application, which aggregates latest top stories from BBC and SKY.
