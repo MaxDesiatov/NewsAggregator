@@ -11,10 +11,8 @@ module.exports = (grunt) ->
   debugConfigJs =
     'async/lib': 'async.js'
     'backbone-amd': 'backbone.js'
-    'backbone-validation/dist': 'backbone-validation-amd.js'
     'backbone.babysitter/lib/amd': 'backbone.babysitter.js'
     'backbone.marionette/lib/core/amd': 'backbone.marionette.js'
-    'backbone.paginator/dist': 'backbone.paginator.js'
     'backbone.wreqr/lib/amd': 'backbone.wreqr.js'
     'bootstrap/dist/js': 'bootstrap.js'
     'jquery': 'jquery.js'
@@ -31,22 +29,22 @@ module.exports = (grunt) ->
     for lib, file of debugConfigJs
       expand: true
       cwd: 'bower_components/' + lib
-      dest: 'dist/public/scripts'
+      dest: 'public/scripts'
       src: file
   for lib, file of debugConfigCss
     debugFiles.push
       expand: true
       cwd: 'bower_components/' + lib
-      dest: 'dist/public/stylesheets'
+      dest: 'public/stylesheets'
       src: file
   debugFiles.push
     expand: true
     cwd: 'bower_components/font-awesome/'
     src: 'font/*'
-    dest: 'dist/public/'
+    dest: 'public/'
 
   jadeConfig = {}
-  for view in ['header', 'users', 'jobs']
+  for view in []
     jadeConfig[view] =
       options:
         client: true
@@ -56,21 +54,15 @@ module.exports = (grunt) ->
           name.replace /.*\/([A-Za-z]+)\.jade/, '$1'
       files: {}
     jadeConfig[view].files['dist/public/views/' + view + '.js'] =
-      'src/public/views/' + view + '/*.jade'
+      'public/views/' + view + '/*.jade'
 
   grunt.initConfig
     watch:
       stylus:
-        files: ['src/**/*.styl']
+        files: ['private/**/*.styl']
         tasks: ['stylus']
-      server:
-        files: ['src/**/*.coffee']
-        tasks: ['coffee']
-      serverJade:
-        files: ['src/app/**/*.jade']
-        tasks: ['copy:jade']
       clientJade:
-        files: ['src/public/**/*.jade']
+        files: ['public/**/*.jade']
         tasks: ['jade']
 
     clean:
@@ -85,43 +77,23 @@ module.exports = (grunt) ->
     stylus:
       app:
         files:
-          'dist/public/stylesheets/style.css': 'src/public/stylesheets/style.styl'
-
-    coffee:
-      all:
-        expand: true
-        cwd: 'src'
-        src: ['**/*.coffee']
-        dest: 'dist'
-        ext: '.js'
-        sourceMap: true
+          'public/stylesheets/style.css': 'private/stylesheets/style.styl'
 
     copy:
       debug:
         files: debugFiles
 
-      jade:
-        files: [{
-          expand: true
-          dot: true
-          cwd: 'src'
-          dest: 'dist'
-          src: ['app/views/**/*.jade']
-        }]
-
     rename:
       jadeRuntime:
-        src: 'dist/public/scripts/runtime.js'
-        dest: 'dist/public/scripts/jade.js'
+        src: 'public/scripts/runtime.js'
+        dest: 'public/scripts/jade.js'
 
     jade: jadeConfig
 
     nodemon:
       lcm:
         options:
-          cwd: 'dist'
-          file: '../node_modules/.bin/lcm'
-          args: ['server']
+          file: 'server.js'
 
     concurrent:
       local:
@@ -136,11 +108,9 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'dist', [
     'clean:dist',
-    'coffee',
     'stylus',
-    'jade',
-    'copy',
-    'rename'
+    # 'jade',
+    'copy'
   ]
 
   grunt.registerTask 'default', [
