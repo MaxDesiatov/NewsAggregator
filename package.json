@@ -11,9 +11,9 @@
     "grunt": "~0.4.2",
     "matchdep": "~0.3.0",
     "jade": "~1.0.2",
-    "htmlparser": "~1.7.7",
     "underscore": "~1.5.2",
-    "request": "~2.30.0"
+    "request": "~2.30.0",
+    "feedparser": "~0.16.5"
   },
   "devDependencies": {
     "grunt-concurrent": "~0.4.2",

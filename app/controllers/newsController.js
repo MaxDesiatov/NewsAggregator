@@ -1,15 +1,23 @@
 var locomotive = require('locomotive'),
     _          = require('underscore'),
-    htmlparser = require('htmlparser'),
+    FeedParser = require('feedparser'),
+    request    = require('request'),
 NewsController = new locomotive.Controller();
 
 _(NewsController).extend({
   index: function () {
-    this.res.send({});
-    // var parser = new htmlparser.RssHandler(function (error, dom) {
-    //   console.log 
-    //   this.res.send(dom);
-    // });
+    var that = this;
+    var items = [];
+    request('http://feeds.bbci.co.uk/news/rss.xml').pipe(new FeedParser())
+    .on('readable', function () {
+      var stream = this, item;
+      while (item = stream.read()) {
+        items.push(item);
+      }
+    })
+    .on('end', function () {
+          that.res.send(items);
+    });
   },
 
   show: function () {

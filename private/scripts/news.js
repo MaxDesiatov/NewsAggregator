@@ -10,8 +10,8 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
   });
 
   var NewsItemView = Marionette.ItemView.extend({
-    tagName: 'li',
-    className: 'news-item',
+    tagName: 'div',
+    className: 'cold-md-12',
     modelEvents: {
       'change': 'render'
     },
@@ -24,9 +24,9 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
   var news = new NewsCollection();
 
   var Empty = Marionette.ItemView.extend({
-    tagName: 'li',
-    className: 'nojobs',
-    template: function () { return 'No jobs have been loaded.'; }
+    tagName: 'div',
+    className: 'cold-md-12',
+    template: function () { return 'No news have been loaded.'; }
   });
 
   var NewsTable = Marionette.CollectionView.extend({

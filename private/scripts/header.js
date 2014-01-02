@@ -10,6 +10,13 @@ define(['backbone', 'backbone.marionette', '../views/header'],
     className: 'container',
     currentlyActive: null,
 
+    // workaround for template not bind before invocation by marionette.js
+    constructor: function () {
+      _.bindAll(this, 'template');
+      args = Array.prototype.slice.apply(arguments);
+      Marionette.ItemView.prototype.constructor.apply(this, args);
+    },
+
     template: function (data) {
       return templates.header({active: this.currentlyActive});
     },
