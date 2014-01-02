@@ -17,7 +17,9 @@
       NewsRouter = Marionette.AppRouter.extend({
         controller: newsController,
         appRoutes: {
-          news: 'index'
+          news: 'index',
+          bbc: 'bbc',
+          sky: 'sky'
         }
       });
 

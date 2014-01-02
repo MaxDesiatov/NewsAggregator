@@ -5,8 +5,7 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
   var NewsModel = Backbone.Model.extend({});
 
   var NewsCollection =  Backbone.Collection.extend({
-    model: NewsModel,
-    url: '/news'
+    model: NewsModel
   });
 
   var NewsItemView = Marionette.ItemView.extend({
@@ -62,14 +61,25 @@ define(['backbone', 'backbone.marionette', 'jquery', 'underscore',
 
   indexLayout = new IndexLayout
 
+  var fetchNews = function (url) {
+    news.fetch({ 
+      url: url,
+      success: function () {
+        require('app').content.show(indexLayout);
+        indexLayout.table.show(newsTable);
+      }
+    });
+  }
+
   return {
     index: function () {
-      news.fetch({ 
-        success: function () {
-          require('app').content.show(indexLayout);
-          indexLayout.table.show(newsTable);
-        }
-      })
+      fetchNews('/news');
+    },
+    sky: function () {
+      fetchNews('/news?source=sky');
+    },
+    bbc: function () {
+      fetchNews('/news?source=bbc');
     }
   };
 });

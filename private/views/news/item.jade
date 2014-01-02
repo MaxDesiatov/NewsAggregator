@@ -4,5 +4,5 @@
     img.item-thumbnail(src=image.url, align='left')
   span.item-summary= summary
 .col-md-12
-  p.pull-right
-    small Published on #{formattedDate}
+  .item-published.pull-right
+    small Published at #{sourceRSS} on #{formattedDate}
